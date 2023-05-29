@@ -12,10 +12,8 @@ const displayBooks = (newBook) => {
   const li = document.createElement('li');
   li.id = newBook.id;
   li.innerHTML = `
-    <p>${newBook.title}</p>
-    <p>${newBook.author}</p>
+    <p>"${newBook.title}" by ${newBook.author}</p>
     <button id="remove" type="button">Remove</button>
-    <hr />
   `;
   bookList.appendChild(li);
 };
@@ -55,7 +53,9 @@ form.addEventListener('submit', (e) => {
   // check for any errors
   if (title.trim() === '' || author.trim() === '') {
     msg.innerText = 'All field are required';
+    msg.classList.add('error');
     setTimeout(() => {
+      msg.classList.remove('error');
       msg.innerText = '';
     }, 3000);
   } else {
@@ -67,6 +67,13 @@ form.addEventListener('submit', (e) => {
 
     // Save books data to localStorage
     addToLocalStorage(newBook);
+
+    msg.innerText = 'Book added successfully';
+    msg.classList.add('success');
+    setTimeout(() => {
+      msg.classList.remove('success');
+      msg.innerText = '';
+    }, 3000);
 
     document.querySelector('#title').value = '';
     document.querySelector('#author').value = '';
@@ -86,6 +93,13 @@ bookList.addEventListener('click', (e) => {
     );
     liParent.remove();
     localStorage.setItem('books', JSON.stringify(filteredBooks));
+
+    msg.innerText = 'Book removed successfully';
+    msg.classList.add('success');
+    setTimeout(() => {
+      msg.classList.remove('success');
+      msg.innerText = '';
+    }, 3000);
   }
   // prevent default submit
   e.preventDefault();
