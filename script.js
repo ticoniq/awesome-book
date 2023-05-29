@@ -82,7 +82,7 @@ bookList.addEventListener('click', (e) => {
     const liParent = e.target.parentElement;
 
     const filteredBooks = books.filter(
-      (book) => book.id !== liParent.id
+      (book) => book.id !== liParent.id,
     );
     liParent.remove();
     localStorage.setItem('books', JSON.stringify(filteredBooks));
