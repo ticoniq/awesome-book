@@ -10,6 +10,7 @@ function Books(id, title, author) {
 // Create Display book on the UI
 const displayBooks = (newBook) => {
   const li = document.createElement('li');
+  li.id = newBook.id;
   li.innerHTML = `
     <p>${newBook.title}</p>
     <p>${newBook.author}</p>
@@ -17,31 +18,32 @@ const displayBooks = (newBook) => {
     <hr />
   `;
   bookList.appendChild(li);
-}
+};
 
-const addToLocalStorage = (newBook) => {
+const getBooks = () => {
   let books;
   if (localStorage.getItem('books') === null) {
     books = [];
   } else {
     books = JSON.parse(localStorage.getItem('books'));
   }
-  books.push(newBook);
-  localStorage.setItem('books', JSON.stringify(books));
-}
+
+  return books;
+};
 
 document.addEventListener('DOMContentLoaded', () => {
-  let books;
-  if (localStorage.getItem('books') === null) {
-    books = [];
-  } else {
-    books = JSON.parse(localStorage.getItem('books'));
-  }
+  const books = getBooks();
 
-  books.forEach(book => {
+  books.forEach((book) => {
     displayBooks(book);
   });
 });
+
+const addToLocalStorage = (newBook) => {
+  const books = getBooks();
+  books.push(newBook);
+  localStorage.setItem('books', JSON.stringify(books));
+};
 
 // Add books
 form.addEventListener('submit', (e) => {
@@ -57,8 +59,7 @@ form.addEventListener('submit', (e) => {
       msg.innerText = '';
     }, 3000);
   } else {
-
-    // Init the books object 
+    // Init the books object
     const newBook = new Books(id, title, author);
 
     // Display book on the UI
@@ -77,7 +78,14 @@ form.addEventListener('submit', (e) => {
 // Remove books
 bookList.addEventListener('click', (e) => {
   if (e.target.id === 'remove') {
-    e.target.parentElement.remove();
+    const books = getBooks();
+    const liParent = e.target.parentElement;
+
+    const filteredBooks = books.filter(
+      (book) => book.id !== liParent.id
+    );
+    liParent.remove();
+    localStorage.setItem('books', JSON.stringify(filteredBooks));
   }
   // prevent default submit
   e.preventDefault();
