@@ -11,6 +11,7 @@ function Books(id, title, author) {
 class UI {
   // Create Display book on the UI
   displayBooks(newBook) {
+    this.newBook = newBook;
     const li = document.createElement('li');
     li.id = newBook.id;
     li.innerHTML = `
@@ -21,17 +22,17 @@ class UI {
   }
 
   // Display messages to the UI
-  getMessage(msg, msgClass) {
-    msg.innerText = 'Book removed successfully';
-    msg.classList.add('success');
+  static getMessage(message, msgClass) {
+    this.message = message;
+    this.msgClass = msgClass;
+    msg.innerText = message;
+    msg.classList.add(msgClass);
     setTimeout(() => {
-      msg.classList.remove('success');
+      msg.classList.remove(msgClass);
       msg.innerText = '';
     }, 3000);
   }
-}
 
-class Store {
   static getBooks() {
     let books;
     if (localStorage.getItem('books') === null) {
@@ -43,25 +44,25 @@ class Store {
     return books;
   }
 
-  static addToLocalStorage(newBook) {
-    const books = Store.getBooks();
-    books.push(newBook);
-    localStorage.setItem('books', JSON.stringify(books));
-  }
-
   static displayFromLocalStorage() {
-    const books = Store.getBooks();
+    const books = UI.getBooks();
 
     const ui = new UI();
     books.forEach((book) => {
       ui.displayBooks(book);
     });
   }
+
+  static addToLocalStorage(newBook) {
+    const books = UI.getBooks();
+    books.push(newBook);
+    localStorage.setItem('books', JSON.stringify(books));
+  }
 }
 
 document.addEventListener(
   'DOMContentLoaded',
-  Store.displayFromLocalStorage
+  UI.displayFromLocalStorage,
 );
 
 // Add books
@@ -73,12 +74,8 @@ form.addEventListener('submit', (e) => {
 
   // check for any errors
   if (title.trim() === '' || author.trim() === '') {
-    msg.innerText = 'All field are required';
-    msg.classList.add('error');
-    setTimeout(() => {
-      msg.classList.remove('error');
-      msg.innerText = '';
-    }, 3000);
+    // display message
+    UI.getMessage('All field are required', 'error');
   } else {
     // Init the books object
     const newBook = new Books(id, title, author);
@@ -89,14 +86,10 @@ form.addEventListener('submit', (e) => {
     ui.displayBooks(newBook);
 
     // Save books data to localStorage
-    Store.addToLocalStorage(newBook);
+    UI.addToLocalStorage(newBook);
 
-    msg.innerText = 'Book added successfully';
-    msg.classList.add('success');
-    setTimeout(() => {
-      msg.classList.remove('success');
-      msg.innerText = '';
-    }, 3000);
+    // display message
+    UI.getMessage('Book added successfully', 'success');
 
     document.querySelector('#title').value = '';
     document.querySelector('#author').value = '';
@@ -108,21 +101,17 @@ form.addEventListener('submit', (e) => {
 // Remove books
 bookList.addEventListener('click', (e) => {
   if (e.target.id === 'remove') {
-    const books = Store.getBooks();
+    const books = UI.getBooks();
     const liParent = e.target.parentElement;
 
     const filteredBooks = books.filter(
-      (book) => book.id !== liParent.id
+      (book) => book.id !== liParent.id,
     );
     liParent.remove();
     localStorage.setItem('books', JSON.stringify(filteredBooks));
 
-    msg.innerText = 'Book removed successfully';
-    msg.classList.add('success');
-    setTimeout(() => {
-      msg.classList.remove('success');
-      msg.innerText = '';
-    }, 3000);
+    // display message
+    UI.getMessage('Book removed successfully', 'success');
   }
   // prevent default submit
   e.preventDefault();
