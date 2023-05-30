@@ -10,18 +10,55 @@
 </head>
 
 <body>
-  <section class="container">
-    <h1>All Awesome Book</h1>
-    <p class="msg"></p>
-    <ul class="book-list"></ul>
+  <header>
+    <nav>
+      <div class="container">
+        <a class="logo" href="index.html">Awesome Books</a>
+        <ul class="nav-ul">
+          <li><a href="#">List</a></li>
+          <li><a href="#">Add new</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <p>Current time in Fawn Creek, KS ‎(UTC-5)‎</p>
+    </div>
+  </header>
+  <main>
+    <section class="container">
+      <h1>All Awesome Book</h1>
+      <p class="msg"></p>
+      <ul class="book-list"></ul>
 
-    <form class="form">
-      <h2>Add a new Book</h2>
+      <form class="form">
+        <h2>Add a new Book</h2>
         <input type="text" id="title" placeholder="Title" />
         <input type="text" id="author" placeholder="Author" />
-      <button type="submit">Add</button>
-    </form>
-  </section>
+        <button type="submit">Add</button>
+      </form>
+    </section>
+
+    <section class="contact">
+      <div class="container">
+        <h2>Contact Information</h2>
+        <p>
+          Do have any question or just want to say "Hello" ? <br>
+          You can reach out to us!
+        </p>
+        <ul>
+          <li>Our email: mail@mail.com</li>
+          <li>Our phone number: 00445577889966</li>
+          <li>Our address: Streetname 22, 84503 City, Country</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container">
+      <p>&copy; Copyright Awesome Books</p>
+    </div>
+  </footer>
 
   <script src="script.js"></script>
 </body>

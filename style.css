@@ -1,14 +1,64 @@
 * {
+  /* border: 1px solid red; */
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
 .container {
   max-width: 1000px;
   margin: auto;
   padding: 0 20px;
+}
+
+nav {
+  height: 50px;
+  border: 3px solid #000;
+}
+
+nav .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.logo {
+  font-weight: bolder;
+  color: #000;
+}
+
+.nav-ul {
+  list-style-type: none;
+  display: flex;
+  padding: 0;
+  gap: 10px;
+}
+
+.nav-ul li:nth-child(2) {
+  border-right: 3px solid #000;
+  border-left: 3px solid #000;
+  padding: 0 10px;
+}
+
+.nav-ul a {
+  color: #000;
+  font-weight: 500;
+}
+
+.nav-ul a:hover {
+  color: #09ba09;
+  transition: 0.3s ease-in;
+}
+
+header p {
+  text-align: right;
+  margin-top: 10px;
 }
 
 .container h1,
@@ -39,14 +89,14 @@
   font-weight: bolder;
 }
 
-ul {
+.book-list {
   list-style-type: none;
   margin: 0;
   padding: 0;
   border: 3px solid #000;
 }
 
-ul li {
+.book-list li {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -54,7 +104,7 @@ ul li {
   font-weight: bolder;
 }
 
-ul li:nth-child(odd) {
+.book-list li:nth-child(odd) {
   background: #ccc;
 }
 
@@ -108,4 +158,42 @@ button:hover {
 .form button {
   float: right;
   background: #09ba09;
+}
+
+.contact {
+  width: 500px;
+  margin: auto;
+  padding: 30px 0;
+}
+
+.contact h3 {
+  text-align: center;
+  font-weight: bolder;
+  font-size: 18px;
+}
+
+.contact p {
+  margin-top: 50px;
+  font-weight: bolder;
+}
+
+.contact ul {
+  margin-top: 20px;
+  font-weight: bolder;
+  margin-left: 30px;
+}
+
+footer {
+  border: 3px solid #000;
+  height: 50px;
+  /* position: absolute;
+  width: 100%;
+  bottom: 0; */
+}
+
+footer .container {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  height: 100%;
 }
