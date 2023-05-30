@@ -4,7 +4,7 @@ const bookList = document.querySelector('.book-list');
 
 const timeDate = document.querySelector('#time');
 
-let options = {
+const options = {
   weekday: 'long',
   year: 'numeric',
   month: 'long',
@@ -19,7 +19,6 @@ const updateTime = () => {
 
   timeDate.innerText = `${date} ${formattedTime}`;
 };
-
 
 setInterval(updateTime, 1000);
 
@@ -83,7 +82,7 @@ class UI {
 
 document.addEventListener(
   'DOMContentLoaded',
-  UI.displayFromLocalStorage
+  UI.displayFromLocalStorage,
 );
 
 // Add books
@@ -126,7 +125,7 @@ bookList.addEventListener('click', (e) => {
     const liParent = e.target.parentElement;
 
     const filteredBooks = books.filter(
-      (book) => book.id !== liParent.id
+      (book) => book.id !== liParent.id,
     );
     liParent.remove();
     localStorage.setItem('books', JSON.stringify(filteredBooks));
