@@ -2,6 +2,27 @@ const form = document.querySelector('.form');
 const msg = document.querySelector('.msg');
 const bookList = document.querySelector('.book-list');
 
+const timeDate = document.querySelector('#time');
+
+let options = {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+};
+
+const updateTime = () => {
+  const today = new Date();
+  const formattedTime = today.toLocaleTimeString();
+
+  const date = today.toLocaleDateString('en-US', options);
+
+  timeDate.innerText = `${date} ${formattedTime}`;
+};
+
+
+setInterval(updateTime, 1000);
+
 function Books(id, title, author) {
   this.id = id;
   this.title = title;
@@ -62,7 +83,7 @@ class UI {
 
 document.addEventListener(
   'DOMContentLoaded',
-  UI.displayFromLocalStorage,
+  UI.displayFromLocalStorage
 );
 
 // Add books
@@ -105,7 +126,7 @@ bookList.addEventListener('click', (e) => {
     const liParent = e.target.parentElement;
 
     const filteredBooks = books.filter(
-      (book) => book.id !== liParent.id,
+      (book) => book.id !== liParent.id
     );
     liParent.remove();
     localStorage.setItem('books', JSON.stringify(filteredBooks));
