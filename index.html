@@ -15,22 +15,24 @@
       <div class="container">
         <a class="logo" href="index.html">Awesome Books</a>
         <ul class="nav-ul">
-          <li><a href="#">List</a></li>
-          <li><a href="#">Add new</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="#" id="list">List</a></li>
+          <li><a href="#" id="addbook">Add new</a></li>
+          <li><a href="#" id="contact">Contact</a></li>
         </ul>
       </div>
     </nav>
     <div class="container">
       <p id="time"></p>
+      <p class="msg"></p>
     </div>
   </header>
   <main>
-    <section class="container">
+    <section class="container list">
       <h1>All Awesome Book</h1>
-      <p class="msg"></p>
       <ul class="book-list"></ul>
+    </section>
 
+    <section class="container form-field">
       <form class="form">
         <h2>Add a new Book</h2>
         <input type="text" id="title" placeholder="Title" />
@@ -61,6 +63,7 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="pages.js"></script>
 </body>
 
 </html>

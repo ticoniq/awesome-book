@@ -108,6 +108,10 @@ form.addEventListener('submit', (e) => {
     // Save books data to localStorage
     UI.addToLocalStorage(newBook);
 
+    document.querySelector('.list').style.display = 'block';
+    document.querySelector('.form-field').style.display = 'none';
+    document.querySelector('.contact').style.display = 'none';
+
     // display message
     UI.getMessage('Book added successfully', 'success');
 
